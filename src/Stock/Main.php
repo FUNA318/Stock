@@ -5,35 +5,10 @@ namespace Stock;
 use pocketmine\plugin\PluginBase;
 use pocketmine\Server;
 use pocketmine\utils\Config;
-use pocketmine\item\Item;
-use pocketmine\scheduler\Task;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\event\entity\EntityTeleportEvent;
-use pocketmine\event\entity\EntityDeathEvent;
-use pocketmine\event\entity\EntityDamageEvent;
-use pocketmine\event\entity\EntityLevelChangeEvent;
-use pocketmine\network\protocol\AddEntityPacket;
-use pocketmine\network\protocol\SetEntityMotionPacket;
-use pocketmine\network\protocol\AddPlayerPacket;
-use pocketmine\network\protocol\PlayerEquipmentPacket;
-use pocketmine\network\protocol\RemoveEntityPacket;
-use pocketmine\network\protocol\SetEntityLinkPacket;
-use pocketmine\network\protocol\UpdateAttributesPacket;
-use pocketmine\network\protocol\EntityEventPacket;
-use pocketmine\network\protocol\AddItemEntityPacket;
-use pocketmine\network\protocol\SetEntityDataPacket;
-use pocketmine\network\protocol\AdventureSettingsPacket;
-use pocketmine\network\protocol\BatchPacket;
-use pocketmine\network\protocol\DisconnectPacket;
-use pocketmine\network\protocol\RespawnPacket;
-use pocketmine\network\protocol\SetSpawnPositionPacket;
-use pocketmine\network\protocol\TakeItemEntityPacket;
-use pocketmine\network\protocol\TileEntityDataPacket;
-use pocketmine\event\server\DataPacketReceiveEvent;
-use pocketmine\network\protocol\DataPacket;
 use pocketmine\network\protocol\Info as ProtocolInfo;
 use pocketmine\Entity\entity;
 use pocketmine\math\Vector3;
@@ -41,46 +16,9 @@ use pocketmine\math\Vector2;
 use pocketmine\Player;
 use pocketmine\level\Level;
 use pocketmine\level\Explosion;
-use pocketmine\network\protocol\AddMobPacket;
-use pocketmine\level\format\mcregion\Chunk;
-use pocketmine\scheduler\PluginTask;
-use pocketmine\scheduler\CallbackTask;
-use pocketmine\nbt\NBT;
-use pocketmine\nbt\tag\Byte;
-use pocketmine\nbt\tag\Compound;
-use pocketmine\nbt\tag\Double;
-use pocketmine\nbt\tag\Enum;
-use pocketmine\nbt\tag\FloatTag;
-use pocketmine\nbt\tag\IntTag;
-use pocketmine\nbt\tag\StringTag;
-use pocketmine\nbt\tag\ShortTag;
 use pocketmine\utils\TextFormat;
 use pocketmine\utils\MainLogger;
-use pocketmine\event\entity\EntityDamageByEntityEvent;
-use pocketmine\event\entity\EntitySpawnEvent;
-use pocketmine\event\entity\EntityDamageByChildEntityEvent;
-use pocketmine\level\Position;
-use pocketmine\entity\Villager;
-use pocketmine\event\TranslationContainer;
-use pocketmine\network\Network;
-use pocketmine\entity\Human;
-use pocketmine\entity\Squid;
-use pocketmine\entity\PrimedTNT;
-use pocketmine\entity\Arrow;
-use pocketmine\event\player\PlayerItemHeldEvent ;
-use pocketmine\entity\Effect;
-use pocketmine\entity\Item as ItemEntity;
-use pocketmine\entity\FallingSand;
-use pocketmine\inventory\Inventory;
 use pocketmine\plugin\Plugin;
-use pocketmine\block\Block;
-use pocketmine\tile\Tile;
-use pocketmine\utils\UUID;
-use pocketmine\utils\BinaryStream;
-use pocketmine\event\level\ChunkLoadEvent;
-use pocketmine\level\particle\FloatingTextParticle;
-use pocketmine\event\block\SignChangeEvent;
-use pocketmine\tile\Sign;
 
 class Main extends PluginBase implements Listener{
 
@@ -252,6 +190,8 @@ $this->getServer()->getPluginManager()->disablePlugin($this);//このプラグ�
         }else{
           $sender->sendMessage("§f[STOCK]§b社長以外不可です。");
         }
+          return true;
+          break;
     }
   }
 }
@@ -274,6 +214,13 @@ $this->getServer()->getPluginManager()->disablePlugin($this);//このプラグ�
         $this->price->set($pre, $prr);
         $this->price->save();
       }
+      if($n == 5){
+        $pre = $this->pre->get($name);
+        $pri = $this->price->get($pre);
+        $prr = $pri - 10;
+        $this->price->set($pre, $prr);
+        $this->price->save();
+        }
     }
   }
   
