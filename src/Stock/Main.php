@@ -87,6 +87,11 @@ $this->getServer()->getPluginManager()->disablePlugin($this);//このプラグ�
         $this->mine->set($sender->getName(), $args[2]);
         $this->mine->save();
       }
+          $pre = $this->pre->get($name);
+        $pri = $this->price->get($pre);
+        $prr = $pri + 3;
+        $this->price->set($pre, $prr);
+        $this->price->save();
       $sender->sendMessage("§f[STOCK]§b購入が完了しました。");
       }else{
         $sender->sendMessage("§f[STOCK]§b未上場の企業です。");
