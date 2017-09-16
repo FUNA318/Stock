@@ -123,6 +123,11 @@ $this->getServer()->getPluginManager()->disablePlugin($this);//このプラグ�
         $this->amount->set("Money", $b);
         $this->amount->save();
         $this->EconomyAPI->addMoney($sender->getName(), +$price);
+          $pre = $this->pre->get($name);
+        $pri = $this->price->get($pre);
+        $prr = $pri - 8;
+        $this->price->set($pre, $prr);
+        $this->price->save();
         $sender->sendMessage("§f[STOCK]§b売りました。");
       }else{
        $sender->sendMessage("§f[STOCK]§b未上場の企業です。");
