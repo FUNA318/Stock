@@ -130,7 +130,7 @@ $this->getServer()->getPluginManager()->disablePlugin($this);//このプラグ�
         $this->EconomyAPI->addMoney($sender->getName(), +$price);
           $pre = $this->pre->get($name);
         $pri = $this->price->get($pre);
-        $prr = $pri - 8;
+        $prr = $pri - 3;
         $this->price->set($pre, $prr);
         $this->price->save();
         $sender->sendMessage("§f[STOCK]§b売りました。");
@@ -163,6 +163,12 @@ $this->getServer()->getPluginManager()->disablePlugin($this);//このプラグ�
           return true;
           break;
         }
+          $money = $this->EconomyAPI->myMoney($sender->getName());
+          $rr = $money + (Int)$args[1];
+          if($money < $rr){
+            $sender->sendMessage("§f[STOCK]§b上場の為の額は11000$以上必要です。");
+            break;
+          }
         $sender->sendMessage("§f[STOCK]§b経費10000$");
         $sender->sendMessage("§f[STOCK]§b内訳1 : 上場基本額8000$");
         $sender->sendMessage("§f[STOCK]§b内訳2 : 公募料金1000$");
