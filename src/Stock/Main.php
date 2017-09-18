@@ -208,6 +208,48 @@ $this->getServer()->getPluginManager()->disablePlugin($this);//このプラグ�
         }
           return true;
           break;
+          case "company":
+     $max = 0;
+        foreach($this->price->getAll(true) as $c){
+        $max += count($c);
+        }
+        $max = ceil(($max / 5));
+        $page = array_shift($args);
+        $page = max(1, $page);
+        $page = min($max, $page);
+        $page = (int)$page;
+        $sender->sendMessage("上場企業リスト".$page."/".$max." を表示");
+        $clanlist = array_reverse($this->company->getAll(),true);
+        $i = 0;
+        foreach($clanlist as $b=>$a){
+        if(($page - 1) * 5 <= $i && $i <= ($page - 1) * 5 + 4){
+        $i1 = $i + 1;
+        $sender->sendMessage("§a[".$i1."]§f".$b." / $".$this->price->get($c));
+        }
+        $i++;
+        }
+        if(count($args) >= 2){
+        $max = 0;
+        foreach($this->price->getAll(true) as $c){
+        $max += count($c);
+        }
+        $max = ceil(($max / 5));
+        $page = array_shift($args);
+        $page = max(1, $page);
+        $page = min($max, $page);
+        $page = (int)$page;
+        $sender->sendMessage("上場企業リスト".$page."/".$max." を表示");
+        $clanlist = array_reverse($this->company->getAll(),true);
+        $i = 0;
+        foreach($clanlist as $b=>$a){
+        if(($page - 1) * 5 <= $i && $i <= ($page - 1) * 5 + 4){
+        $i1 = $i + 1;
+        $sender->sendMessage("§a[".$i1."]§f".$b." / $".$this->price->get($c));
+        }
+        $i++;
+        }
+        }
+          break;
     }
   }
 }
