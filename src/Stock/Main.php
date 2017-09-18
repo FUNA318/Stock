@@ -50,7 +50,7 @@ $this->getServer()->getPluginManager()->disablePlugin($this);//このプラグ�
       if(!isset($args[0])) return false;
       switch($args[0]){
        case "help":
-        $sender->sendMessage("§a[About STOCKPLUGIN]\n§b/stock buy <会社名> <個数>§f株を買います。\n§b/stock  price <会社名>§f株の値段を確認します。\n§b/stock sell <会社名> <個数> §f株を売ります。\n§b/stock list <信頼のための額> <はじめの株の数> <会社名>§f上場します。\n§b/stock plus <追加株> §f株追加。\n§b/stock owner <会社名>§f株主を把握。");
+        $sender->sendMessage("§a[About STOCKPLUGIN]\n§b/stock buy <会社名> <個数>§f株を買います。\n§b/stock  price <会社名>§f株の値段を確認します。\n§b/stock sell <会社名> <個数> §f株を売ります。\n§b/stock list <信頼のための額> <はじめの株の数> <会社名>§f上場します。\n§b/stock plus <追加株> §f株追加。\n§b/stock owner <会社名>§f株主を把握。\n§b/stock company §f上場企業を把握。");
         break;
 
        case "buy":
