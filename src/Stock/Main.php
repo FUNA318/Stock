@@ -60,8 +60,8 @@ $this->getServer()->getPluginManager()->disablePlugin($this);//このプラグ�
         break;
        }
         $name = $sender->getName();
-        if($this->price->exists("".$args[1]."")){
-        $pr = $this->price->get("".$args[1]."");
+        if($this->price->exists($args[1])){
+        $pr = $this->price->get($args[1]);
         $prize = $pr * (Int)$args[1];
         $this->EconomyAPI->reduceMoney($sender->getName(), $prize);
         $all = $this->company->getAll();
@@ -73,9 +73,9 @@ $this->getServer()->getPluginManager()->disablePlugin($this);//このプラグ�
         $r = (Int)$t + $pri;
         $this->amount->set("Money", $r);
         $this->amount->save();
-        $a = $this->stock->get("".$args[1]."");
+        $a = $this->stock->get($args[1]);
         $b = $a - (Int)$args[2];
-        $this->stock->set("".$args[1]."", $b);
+        $this->stock->set($args[1], $b);
         $this->stock->save();
         $this->mine = new Config($this->getDataFolder() . "".$args[1].".yml", Config::YAML);
         if($this->mine->exists($sender->getName())){
