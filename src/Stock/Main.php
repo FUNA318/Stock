@@ -151,24 +151,21 @@ $this->getServer()->getPluginManager()->disablePlugin($this);//このプラグ�
         if(!isset($args[1])) return false;//上場時信頼してもらうために出すお金
         if(!isset($args[2])) return false;//はじめの株の個数
         if(!isset($args[3])) return false;//会社名
-        if($this->company->exists($args[3])){
-          break;
-        }
-        $pre = $sender->getName();
-        $this->company->set(strtolower($args[3]),
-        array("社長" => $pre));
-        $this->company->save();
-        if($args[1] < 1000){
-          $sender->sendMessage("§f[STOCK]§b上場時信頼上昇の為の額は1000$以上必要です。");
+          if((Int)$args[1] < 1000){
+          $sender->sendMessage("§f[STOCK]§b上場時信頼上昇の為の額は1000以上必要です。");
           return true;
           break;
         }
           $money = $this->EconomyAPI->myMoney($sender->getName());
           $rr = $money + (Int)$args[1];
           if($money < $rr){
-            $sender->sendMessage("§f[STOCK]§b上場の為の額は11000$以上必要です。");
+            $sender->sendMessage("§f[STOCK]§b上場の為の額は11000以上必要です。");
             break;
           }
+        $pre = $sender->getName();
+        $this->company->set(strtolower($args[3]),
+        array("社長" => $pre));
+        $this->company->save();
         $sender->sendMessage("§f[STOCK]§b経費10000$");
         $sender->sendMessage("§f[STOCK]§b内訳1 : 上場基本額8000$");
         $sender->sendMessage("§f[STOCK]§b内訳2 : 公募料金1000$");
